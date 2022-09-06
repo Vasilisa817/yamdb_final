@@ -8,7 +8,7 @@ services:
     env_file:
       - ./.env
   web:
-    image: vasilisa817/api_yamdb_web:v.2.06.09.2022
+    image: vasilisa817/api_yamdb_web:latest
     restart: always
     volumes:
       - static_value:/app/static/
