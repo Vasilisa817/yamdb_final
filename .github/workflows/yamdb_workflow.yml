@@ -39,7 +39,7 @@ jobs:
           username: ${{ secrets.LOGIN_DOCKER_HUB }}
           password: ${{ secrets.PASSWORD_DOCKER_HUB }}
       - name: Push to Docker Hub
-        uses: docker/build-push-action@v2 
+        uses: docker/build-push-action@v2
         with:
           context: ./api_yamdb/
           push: true
