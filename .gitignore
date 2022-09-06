@@ -60,6 +60,8 @@ coverage.xml
 local_settings.py
 db.sqlite3
 db.sqlite3-journal
+migrations/
+
 
 # Flask stuff:
 instance/
@@ -146,7 +148,7 @@ dmypy.json
 .mypy_cache
 
 # папки со статикой и медиа
-static/
-posts/static/
 media/
 
+# файл запросов к api
+requests.http
