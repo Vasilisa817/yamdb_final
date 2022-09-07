@@ -43,7 +43,7 @@ jobs:
         with:
           context: ./api_yamdb/
           push: true
-          tags: vasilisa817/api_yamdb_web:latest
+          tags: ${{ secrets.HUB_USERNAME }}/api_yamdb_web:latest
 
   deploy:
     runs-on: ubuntu-latest
