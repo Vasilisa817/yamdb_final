@@ -79,11 +79,10 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
-            sudo docker-compose exec web python manage.py makemigrations users
-            sudo docker-compose exec web python manage.py makemigrations reviews
-            sudo docker-compose exec web python manage.py migrate
-            sudo docker-compose exec web python manage.py collecstatic --noinput
-            sudo docker-compose exec web python manage.py importdata
+            sudo docker-compose exec -it web python manage.py makemigrations
+            sudo docker-compose exec -it web python manage.py migrate
+            sudo docker-compose exec -it web python manage.py collecstatic --noinput
+            sudo docker-compose exec -it web python manage.py importdata
   
   send_message:
     runs-on: ubuntu-latest
