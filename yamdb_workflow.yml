@@ -75,7 +75,7 @@ jobs:
   
   send_message:
     runs-on: ubuntu-latest
-    needs: manage_cmd
+    needs: deploy
     if: github.ref == 'refs/heads/master'
     steps:
     - name: send message
