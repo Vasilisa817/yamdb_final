@@ -84,9 +84,9 @@ jobs:
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
             sudo docker-compose exec -T web python manage.py makemigrations
-            sudo docker compose exec -T web python manage.py collectstatic --noinput 
-            sudo docker compose exec -T web python manage.py migrate 
-            sudo docker compose exec -T web python manage.py importdata
+            sudo docker-compose exec -T web python manage.py collectstatic --noinput
+            sudo docker-compose exec -T web python manage.py migrate 
+            sudo docker-compose exec -T web python manage.py importdata
   
   send_message:
     runs-on: ubuntu-latest
