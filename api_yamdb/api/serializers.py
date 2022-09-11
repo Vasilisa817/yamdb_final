@@ -95,9 +95,7 @@ class TitleSerializer(serializers.ModelSerializer):
 
 
 class RegisterSerializer(serializers.Serializer):
-    '''
-    Serializer to register new users.
-    '''
+    """Serializer to register new users."""
     username = serializers.CharField(max_length=150,
                                      required=True
                                      )
@@ -120,9 +118,7 @@ class RegisterSerializer(serializers.Serializer):
 
 
 class ObtainTokenSerializer(serializers.Serializer):
-    '''
-    Serializer for getting token after registration.
-    '''
+    """Serializer for getting token after registration."""
     username = serializers.CharField(max_length=150,
                                      required=True)
     confirmation_code = serializers.CharField(required=True)
@@ -132,9 +128,7 @@ class ObtainTokenSerializer(serializers.Serializer):
         fields = ('username', 'confirmation_code')
 
     def validate(self, data):
-        '''
-        Checking that user entered right confirmation_code.
-        '''
+        """Checking that user entered right confirmation_code."""
         user = get_object_or_404(User, username=data.get('username'))
         if data.get('confirmation_code') != user.confirmation_code:
             raise serializers.ValidationError(

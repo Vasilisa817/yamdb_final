@@ -28,11 +28,11 @@ from users.models import User
 
 
 class RegisterViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
-    '''
+    """
     This viewset is intended to register new users. Also users can
     get their confirmation code if registration was by person who had
     role "admin".
-    '''
+    """
 
     serializer_class = RegisterSerializer
 
@@ -40,8 +40,8 @@ class RegisterViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
         confirmation_code = user.confirmation_code
         email = user.email
         send_mail(
-            'E-mail verification',
-            f'Your confirmation_code is {confirmation_code}',
+            'E-mail верификация.',
+            f'Ваш код подтверждения: {confirmation_code}',
             SERVICE_EMAIL,
             [email]
         )
@@ -74,10 +74,10 @@ class RegisterViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
 
 @api_view(["POST"])
 def obtain_token(request):
-    '''
+    """
     This is a view for obtaining token by entering user "username"
     and "confirmation code".
-    '''
+    """
     serializer = ObtainTokenSerializer(data=request.data)
     serializer.is_valid(raise_exception=True)
     username = serializer.data.get('username')

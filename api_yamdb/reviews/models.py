@@ -1,9 +1,12 @@
+from unittest.util import _MAX_LENGTH
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from .validators import validate_not_future_year
 from users.models import User
 
+
+_MAX_LENGTH_VIEW = 15
 
 class Category(models.Model):
     name = models.CharField('имя категории', max_length=256)
@@ -28,7 +31,7 @@ class Genre(models.Model):
         verbose_name_plural = 'Жанры'
 
     def __str__(self):
-        return self.name[:15]
+        return self.name[_MAX_LENGTH_VIEW]
 
 
 class Title(models.Model):
@@ -58,7 +61,7 @@ class Title(models.Model):
         ]
 
     def __str__(self):
-        return self.name[:15]
+        return self.name[_MAX_LENGTH_VIEW]
 
 
 class GenreTitle(models.Model):
@@ -95,7 +98,7 @@ class Review(models.Model):
         ]
 
     def __str__(self):
-        return f'{self.title} {self.text[:15]}'
+        return f'{self.title} {self.text[_MAX_LENGTH_VIEW]}'
 
 
 class Comment(models.Model):
@@ -116,4 +119,4 @@ class Comment(models.Model):
         verbose_name_plural = 'Комментарии'
 
     def __str__(self):
-        return f'{self.review} {self.text[:15]}'
+        return f'{self.review} {self.text[_MAX_LENGTH_VIEW]}'

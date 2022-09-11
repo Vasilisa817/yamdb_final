@@ -7,8 +7,4 @@ class ListCreateDestroyViewSet(
     mixins.DestroyModelMixin,
     viewsets.GenericViewSet,
 ):
-    """
-    Implement only List, Create and Delete operations.
-    """
-
-    pass
+    """Implement only List, Create and Delete operations."""

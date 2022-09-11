@@ -4,8 +4,8 @@ from reviews.models import Title
 
 
 class TitleFilter(django_filters.FilterSet):
-    """
-    Filters by name, year, category and genre.
+    """Filters by name, year, category and genre.
+
     Category and genre are ForeignKeys. Thus to keep genre and category
     filters name but filter by their slug field, we override filter here.
     Also name filter is expected to use 'icontains' lookup instead of
