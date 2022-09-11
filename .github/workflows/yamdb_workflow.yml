@@ -1,6 +1,10 @@
 name: Django-app workflow
 
-on: [push]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
   tests:
@@ -79,10 +83,10 @@ jobs:
         key: ${{ secrets.SSH_KEY }}
         passphrase: ${{ secrets.PASSPHRASE }}
         script: |
-            sudo docker-compose exec -it web python manage.py makemigrations
-            sudo docker-compose exec -it web python manage.py migrate
-            sudo docker-compose exec -it web python manage.py collecstatic --noinput
-            sudo docker-compose exec -it web python manage.py importdata
+            sudo docker-compose exec -it web python3 manage.py makemigrations
+            sudo docker compose exec -it web python3 manage.py collectstatic --noinput 
+            sudo docker compose exec -it web python3 manage.py migrate 
+            sudo docker compose exec -it web python3 manage.py importdata
   
   send_message:
     runs-on: ubuntu-latest
