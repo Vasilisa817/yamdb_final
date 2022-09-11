@@ -1,6 +1,10 @@
 name: Django-app workflow
 
-on: [push]
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
 
 jobs:
   tests:
@@ -65,11 +69,28 @@ jobs:
             echo POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} >> .env
             echo DB_HOST=${{ secrets.DB_HOST }} >> .env
             echo DB_PORT=${{ secrets.DB_PORT }} >> .env
-            sudo docker-compose up -d 
+            sudo docker-compose up -d
+
+  manage_cmd:
+    runs-on: ubuntu-latest
+    needs: deploy
+    steps:
+    - name: executing remote ssh commands to deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USER }}
+        key: ${{ secrets.SSH_KEY }}
+        passphrase: ${{ secrets.PASSPHRASE }}
+        script: |
+            sudo docker-compose exec -T web python manage.py makemigrations
+            sudo docker-compose exec -T web python manage.py collectstatic --noinput
+            sudo docker-compose exec -T web python manage.py migrate 
+            sudo docker-compose exec -T web python manage.py importdata
   
   send_message:
     runs-on: ubuntu-latest
-    needs: deploy
+    needs: manage_cmd
     steps:
     - name: send message
       uses: appleboy/telegram-action@master
