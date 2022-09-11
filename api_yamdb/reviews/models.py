@@ -1,12 +1,11 @@
-from unittest.util import _MAX_LENGTH
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 
 from .validators import validate_not_future_year
 from users.models import User
 
-
 _MAX_LENGTH_VIEW = 15
+
 
 class Category(models.Model):
     name = models.CharField('имя категории', max_length=256)

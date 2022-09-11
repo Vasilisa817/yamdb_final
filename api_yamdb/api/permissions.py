@@ -5,7 +5,7 @@ from users.models import ROLES
 
 class IsAdminPermission(permissions.BasePermission):
     """Checks access rights for requests available to users
-    with role 'admin' only."""    
+    with role 'admin' only."""
     def has_permission(self, request, view):
         return (request.user.role == ROLES.admin.name
                 or request.user.is_superuser)
